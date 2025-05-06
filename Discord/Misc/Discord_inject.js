@@ -1,19 +1,80 @@
 const body = `
+/* NEW 2025 */
+
+.codeContainer__75297 {
+    max-width:90vw!important;
+}
+
+/* Profile aimations */
+[class^="profileEffects_"] { display: none!important; }
+
+[class^="jumpToPresentBar_"] {
+    display: none;
+}
+
+.visual-refresh.density-compact {
+    --custom-category-channel-space-before-category: 12px;
+}
+
+[data-list-item-id^="channels"] > [data-text-variant="text-sm/medium"] > .overflow__82b15:before {
+    content: "[ ";
+}
+
+[data-list-item-id^="channels"] > [data-text-variant="text-sm/medium"] > .overflow__82b15:after {
+    content: " ]";
+}
+
+
+/* hiding new title bar */
+div[class^="base_"] > div[class^="bar_"] {
+    display: none!important;
+}
+
+:root {
+    --custom-app-top-bar-height: 0px!important;
+}
+
+
+.visual-refresh .base_c48ade {
+    grid-template-areas:
+        "guildsList notice notice"
+        "guildsList channelsList page";
+    grid-template-rows: [top] 0px [titleBarEnd] 100vh [noticeEnd] 1fr [end];
+}
+
+/* Shrinking CHANNELS panel a bit */
+div[class*="sidebarList"],
+div[class^="content_"] > div[class^="sidebar_"]
+{
+    width: 235px!important;
+}
+
 /* ========================= */
 /* ==== BANNERS & STUFF ==== */
 /* ========================= */
 
+/* test banner hide*/
+header + [class*="animatedContainer"],
+ul[aria-label="Channels"] > div[aria-hidden="true"]:nth-child(1)
+{
+    display: none!important;
+}
+
+/* removing Add Server */
+[aria-label="Servers"] ~ div[class^="tutorialContainer"] { display: none!important; }
+
+
 /* titlebar */
 #app-mount > div[class*="titleBar"] { display: none!important; }
 
-form.form__13a2c > div[class^="wrapper"] {
+form[class*="form_"] > div[class^="wrapper"] {
     margin-bottom: 1px;
     padding-top: 6px;
     padding-bottom: 6px;
     
 }
 
-form.form__13a2c > div[class^="wrapper"] img { display: none; }
+form[class*="form_"] > div[class^="wrapper"] img { display: none; }
 
 /* For some reason affects the upload button
 form.form__13a2c button {
@@ -54,8 +115,8 @@ form.form__13a2c button {
 }
 
 /* My username color for cozy */
-img[src*="224573501330292736"] ~ h3[class^="header"] span[class^="username"]:first-of-type,
-img[src*="1155844548879196210"] ~ h3[class^="header"] span[class^="username"]:first-of-type
+img[src*="4576876798690908797"] ~ h3[class^="header"] span[class^="username"]:first-of-type,
+img[src*="86787698908700960980"] ~ h3[class^="header"] span[class^="username"]:first-of-type
 {
     color: blue!important;
 }
@@ -114,13 +175,21 @@ div[class^="unreadMentionsIndicatorBottom"] {
     padding-top: 0;
 }
 
+/* Spacing between DM icon and rest if the servers */
+ul[data-list-id="guildsnav"] > div > div {
+    gap: 8px!important;
+}
+
+/* Spacing between guild icons */
+[aria-label="Servers sidebar"] [aria-label="Servers"] { gap: 8px!important; }
+
 [aria-label="Servers sidebar"] [class^="footer"] [class^="listItem"],
 [aria-label="Servers sidebar"] [class^="tutorialContainer"]  [class^="listItem"]
 {
     margin-bottom: 0;
 }
 
-/* Placeholder for server icons that failed to load, on hover */
+/* FIXME  Placeholder for server icons that failed to load, on hover */
 div[class^="listItem"] div[class^="wrapper"]:hover > img
 {
     background-image: repeating-linear-gradient( 45deg, gray, gray 2px, transparent 1px, transparent 5px );
@@ -132,26 +201,30 @@ a[href="/shop"] { display: none!important;}
 /* Base was moved in Sep 2019 to the left for 72px (defaile guild wrapper width)*/
 [aria-label="Servers sidebar"] div[class^="container"] > div[class^="base"] { left: 0;}
 
+/* Adjusting default svg TOP and LEFT offsets, affects SPECIAL icons */
+div[class^="listItemWrapper_"] > div > svg {
+    top: 1px!important;
+    left: -1px!important;
+}
 
-/* Server element size in the list */
-[aria-label="Servers sidebar"] div[class^="listItem"],
-[aria-label="Servers sidebar"] [aria-label="Servers"] > div[class^="wrapper"]
+/* Server element size and padding in the list */
+[aria-label="Servers sidebar"] div[class^="listItem"]
 {
-    width: 48px;
-    margin-bottom: 6px;
+    width: 54px;
     margin-right: 0!important;
     justify-content: center;
-    margin-left: 2px;
+    margin-left: 0px;
 }
 
-/* Above and Combine areas for the server items */
-.wrapper-3XVBev {
-    top: 0;
+/* Resize pill and make in on top */
+[aria-label="Servers sidebar"] [class^="pill_"]
+{
+    z-index: 1!important;
+    width: 3px!important;
+    top: 0px;
 }
 
-/* THIS BUGS OUT FOR SOME REASON -- FIXME! */
-/* Removing original clip mask and border on special buttons 
-div[class^="listItem"] div[class*="wrapper"] > svg > mask { display:none; }*/
+/* Removing original clip mask and border on special buttons */
 div[class^="listItem"] div[class*="wrapper"] > svg > foreignObject { mask-image: none; }
 div[class^="listItem"] > div[class^="listItemWrapper"] > div[class*="wrapper"] {
     border-radius: unset;
@@ -165,57 +238,46 @@ div[class^="listItem"] > div > div[data-dnd-name] > div[class*="wrapper"] {
     height: 44px;
 }
 
-/* Applying our own size to server image icons and label placeholders  */
-#app-mount div[class^="listItem"] div[data-dnd-name] > div[class*="wrapper"] > svg > foreignObject > div[class^="wrapper"] > img, /* the server icon */
-#app-mount div[class^="listItem"] div[data-dnd-name] > div[class*="wrapper"] > svg > foreignObject > div[class^="wrapper"] > div[class*="acronym"] /* placholder for no icon */
+div[class^="listItem"] div[class*="wrapper"] [data-list-item-id="guildsnav___home"]
 {
-    clip-path: circle(20px at center);
+    width: 46px;
+    height: 46px;
+}
+
+/* Applying our own size to server image icons and label placeholders  */
+div[class^="listItem"] div[data-dnd-name] > div[class*="wrapper"] > svg > foreignObject > div[class^="wrapper"] > img, /* the server icon */
+div[class^="listItem"] div[data-dnd-name] > div[class*="wrapper"] > svg > foreignObject > div[class^="wrapper"] > div[class*="acronym"] /* placholder for no icon */
+{
+    clip-path: circle(19px at center);
     height: 40px;
-    width: 40px;
     margin-right: 2px;
 }
 
-/* Reducing fornt-size for no icon server with labes */
-#app-mount div[class^="listItem"] div[data-dnd-name] > div[class*="wrapper"] > svg > foreignObject > div[class^="wrapper-"] {
-    font-size: 12px;
+
+div[class^="tutorialContainer"] {
+    --guildbar-avatar-size: 52px;    
 }
 
-
-#app-mount > div[class|="app"] nav[class|="wrapper"] div[class^="tutorialContainer"] > div[class^="wrapper"] {
-    top: 0;
-}
 
 /* Special H/W for the special icons */
-div[class^="listItem"] div[class^="wrapper"] div[class^="circleIconButton"] /* special buttons */
+div[class^="itemsContainer_"] > div[class^="stack"] > div[class^="tutorialContainer"] div[class^="pill"]
 {
-    height: 40px;
-    width: 44px;
-    margin-top: 4px;
-}
-
-/* Special case for HOME button */
-div[class^="listItem"] div[class^="wrapper"] > svg > foreignObject div[class^="childWrapper"] {
-    height: 44px;
-    width: 44px;
-    margin-right: 4px;
-}
-
-
-/* Separator between listItem sections? */
-#app-mount > div[class|="app"] nav[class|="wrapper"] div[class^="guildSeparator"] {
-    margin-top: 6px;
-}
-
-/* Hiding  the banner 
-div[class*="bannerVisible-"] > div[class^="animatedContainer-"],
-div[class^="animatedContainer-"] > div[class^="bannerImage-"] {
     display: none;
 }
-div[class*="bannerVisible-"] ~ #channels > div[class^="content-"] > :first-child {
-   position:absolute;
-   visibility:hidden;
+div[class^="itemsContainer_"] > div[class^="stack"] > div[class^="listItem"] div[class^="wrapper"] foreignObject,
+div[class^="itemsContainer_"] > div[class^="stack"] > div[class^="tutorialContainer"] div[class^="wrapper"] foreignObject
+{
+    height: 48px;
+    width: 48px;
 }
-*/
+
+div[class^="itemsContainer_"] > div[class^="stack"] > div[class^="listItem"] div[class^="wrapper"] div[class^="circleIconButton"],
+div[class^="itemsContainer_"] > div[class^="stack"] > div[class^="tutorialContainer"] div[class^="wrapper"] div[class^="circleIconButton"]
+{
+    height: 44px;
+    width: 44px;
+}
+
 
 /* Hiding Nitro section in Friends and removing Quick-Search input at the top */
 nav[class^="privateChannels"] > div[class^="searchBar"],
@@ -223,54 +285,32 @@ nav[class^="privateChannels"] a[href*="/store"] {
     display: none;
 }
 
-/* Expandable container itself */
-#app-mount > div[class|="app"] nav[class|="wrapper"] div[aria-label="Servers"] > div[class^="wrapper"] {
-    width: 48px;
-    height: calc(100%)!important;
-}
 
-#app-mount > div[class|="app"] nav[class|="wrapper"] div[aria-label="Servers"] > div[class^="wrapper"] > ul[id^="folder-items"] { height: calc(100%)!important; }
+/* SERVER FOLDERS */
 
-/* Server folder background shift on left */
-div[aria-label="Servers"] > div[class^="wrapper"] > span[class^="expandedFolderBackground"] {
-    left: 2px;
+div[aria-label="Servers"] > div[class^="folderGroup"] > span[class^="folderGroupBackground"] {
+    left: 3px;
+    top: 0px;
     border-radius: 0;
-    bottom: -5px;
 }
 
-div[aria-label="Servers"] > div[class^="wrapper"] > span[class^="expandedFolderBackground"]:not(.collapsed_bc7085) {
+div[aria-label="Servers"] > div[class^="folderGroup"] > span[class^="folderGroupBackground"]:not(.collapsed_bc7085) {
     /* background-color: #104b70; */
     background-color: rgba(88, 101, 242, 0.4);
 }
 
-div[aria-label="Servers"] > div[class^="wrapper"] > [id^="folder-items"]
-{
-    height: min-content!important;
-}
-
-div[aria-label="Servers"] > div[class^="wrapper"] > span[class*="collapsed"] {
-    bottom: 0px;
-}
-
-div[aria-label="Servers"] > div[class^="wrapper"] > div[class^="listItem"] {
-    margin-bottom: 0px;
-}
-
-div[aria-label="Servers"] > div[class^="wrapper"] {
-    margin-bottom: 6px;
-}
-
-div[aria-label="Servers"] > div[class^="wrapper"] > span[class^="expandedFolderBackground"]:not(.collapsed_bc7085) ~ div[class^="listItem"] foreignObject > div[class^="folder"] {
-    /* background-color: #104b70; */
+div[aria-label="Servers"] > div[class^="folderGroup"] foreignObject div[class^="folderPreviewWrapper"] {
+    border-radius: 0;
     background-color: rgba(88, 101, 242, 0.4);
 }
 
-#app-mount > div[class|="app"] nav[class|="wrapper"] div[aria-label="Servers"] > div[class^="wrapper"] > div[class^="listItem"] foreignObject > div[class^="folder"] > div[class^="folderIconWrapper"] {
-    background-color: transparent!important;
+div[aria-label="Servers"] > div[class^="folderGroup"] foreignObject div[class^="folderIconWrapper"] {
+    padding-left: 2px;
 }
 
+/* APP DOWNLOAD */
 /* Removing the App Download button and the divier to free up space */
-[data-list-id="guildsnav"] div[class^="scroller"] > div[class^="listItem_"]:nth-last-child(-n+3) { display:none; }
+[data-list-id="guildsnav"] div[class^="itemsContainer_"] > div[class^="stack"] > div[class^="listItem_"]:nth-last-child(-n+2) { display:none; }
 
 
 
@@ -280,7 +320,8 @@ div[aria-label="Servers"] > div[class^="wrapper"] > span[class^="expandedFolderB
 
 /* Removing "in-voice " overlay and new channel badge */
 [class^="sidebar"] .container_eba0ba.bottom_eba0ba,
-[class^="newChannel"]
+[class^="newChannel"],
+[class*="voiceBar"]
 {
     display: none;
 }
@@ -313,8 +354,39 @@ li[class*="containerDefault"] a[href^="/channels/"] div[aria-label="Text"] {
 }
 
 /*Shrinking account panel to free up space for channels*/
+/* 2025 update as well*/
+[aria-label="User area"]
+{
+    bottom: 0px!important;
+    left: 0px!important;
+    width: 100%!important
+}
+
+[aria-label="User area"] div[class*="avatar_"],
+[aria-label="User area"] div[class*="avatar_"] svg
+{
+    width: 34px!important;
+    height: 34px!important;
+}
+
+[aria-label="User area"] div[class*="avatar_"] {
+    padding-top: 4px;
+}
+
+[aria-label="User area"] div[class^="avatarWrapper_"] {
+    gap: 2px;
+}
+
+
+.visual-refresh .sidebar_c48ade:after {
+    content: unset;
+}
 [aria-label="User area"] > [class^="container"] {
-    height: 32px;
+    height: 34px!important;
+    min-height: 34px!important;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
     border-top: 0.5px solid #535251;
 }
 
@@ -399,7 +471,7 @@ div[class^="chat"] > div > section[aria-label="Channel header"] {
     justify-content: space-between;
 }
 
- section[aria-label="Channel header"] > div[class^="upperContainer"] {
+section[aria-label="Channel header"] > div[class^="upperContainer"] {
     align-items: flex-start;
     justify-content: space-between;
     background-color: white;
@@ -445,9 +517,14 @@ section[aria-label="Channel header"]  div[class^="children_"]:hover {
 	transition: width 0.2s linear, max-height 0.2s linear 0.2s;
 }
 
+/* Weird dot inside */
+section[aria-label="Channel header"] svg[class^="dot_"] {
+    display: none;
+}
+
 /* Some icon wrapper inside channel desc*/
-section[aria-label="Channel header"]  div[class^="children_"] > div[class^="iconWrapper_"] {
-    margin-right: 6px;
+section[aria-label="Channel header"] div[class^="upperContainer_"] > div[class^="iconWrapper_"] {
+    margin-left: 5px;
 }
 
 /* Challen title no-wrap thing? */
@@ -494,6 +571,7 @@ section[aria-label="Channel header"] div[class^="toolbar_"] {
     border-left: solid 1px #aaabad;
     border-bottom-left-radius: 5px;
     box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    gap: 0px; /* 2025*/
 }
 
 section[aria-label="Channel header"] div[class^="toolbar_"]::before  {
@@ -511,7 +589,7 @@ section[aria-label="Channel header"] div[class^="toolbar_"] > div[class*="iconWr
 section[aria-label="Channel header"] div[class^="toolbar_"] > div[aria-label="Threads"],
 section[aria-label="Channel header"] div[class^="toolbar_"] > div[aria-label="Notification Settings"],
 section[aria-label="Channel header"] div[class^="toolbar_"] > div[aria-label="Pinned Messages"],
-section[aria-label="Channel header"] div[class^="toolbar_"] > div[aria-label="Show Member List"],
+section[aria-label="Channel header"] div[class^="toolbar_"] > div[aria-label*="Member List"],
 section[aria-label="Channel header"] div[class^="toolbar_"] > div[aria-label="Inbox"],
 section[aria-label="Channel header"] div[class^="toolbar_"] > a[href="https://support.discord.com"],
 section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="recentsIcon"]
@@ -532,9 +610,19 @@ section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="search
 }
 
 /* Searchbar width */
-section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="search_"] div[class^="searchBar_"] { width: unset;}
+section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="search_"] div[class^="searchBar_"] {
+    width: unset;
+    height: 24px;
+    border-radius: 4px;
+}
 
-section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="search_"] div[class^="searchBar_"]:focus-within { width: 15vw;}
+div[class^="searchBar_"] > [class^="icon_"] {
+    height: 20px;
+}
+
+section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="search_"] div[class^="searchBar_"]:focus-within {
+    width: 15vw;
+}
 
 /* Search text? */
 section[aria-label="Channel header"] div[class^="toolbar_"] > div[class^="search_"] .DraftEditor-root .public-DraftEditorPlaceholder-root {visibility: hidden;}
@@ -593,8 +681,24 @@ form[class^="form"] {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-top: 2px solid var(--background-modifier-accent);
-    margin: 0 2px;
+    padding-left: 0!important;
+    padding-right: 0!important;
 }
+
+form[class^="form"] div[class^="textArea_"] {
+    height: 25px;
+    min-height: 25px!important;
+}
+
+form[class^="form"] [class*="sansAttachButton"] {
+    padding-left: 12px;
+}
+
+/*
+form[class^="form"]  [class*="attachButton"] {
+    background-color: #d5d5d5a6;
+}
+*/
 
 /* Font */
 [role="textbox"] [data-slate-node="text"],
@@ -606,7 +710,7 @@ form[class^="form"] {
 
 /* Paddign adjustments for text area */
 form[class^="form"] div[class*="slateTextArea"] {
-    padding-left: 0.5rem;
+    padding-left: 0.1rem;
 }
 
 /* Hiding input box if disabled */
@@ -657,7 +761,6 @@ form[class^="form"] div[class^="textArea"] > div > div[class^="placeholder"] { v
 
 /* Hiding title bar on client */
 #app-mount > div[class^="titleBar"] { display: none }
-
 
 /*/ --- MESSAGES --- /*/
 
@@ -824,6 +927,12 @@ div[class*="messageEditorCompact"] div[class*="scrollableContainer_"] {
     overflow-y: hidden;
     background-color: #ebedef57;
     border-radius: 0;
+}
+
+/* Code blocks */
+
+.visual-refresh .container__4d95d {
+    max-width: max-content;
 }
 
 /* In-line|code block stylization with border  */
